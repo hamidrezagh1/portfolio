@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Modern Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Reset & Font */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+body{background:#0d0d0d;color:#fff;overflow-x:hidden;}
+
+/* Background */
+body::before{
+    content:"";
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:url('https://images.unsplash.com/photo-1593642532973-d31b6557fa68?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1920') no-repeat center center/cover;
+    filter: brightness(0.25) blur(2px);
+    z-index:-2;
+}
+.code-overlay{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 40px);
+    z-index:-1;
+    animation:moveLines 12s linear infinite;
+}
+@keyframes moveLines{0%{background-position:0 0;}100%{background-position:0 40px;}}
+
+/* Header */
+header{background:rgba(0,0,0,0.85);padding:20px 0;position:sticky;top:0;z-index:100;display:flex;justify-content:center;}
+header h1{font-size:2.2rem;color:#ffdd57;text-shadow:0 0 20px #ffdd57;margin-right:40px;}
+nav a{margin:0 20px;font-weight:bold;color:white;text-decoration:none;transition:0.3s;}
+nav a:hover{color:#4af;transform:scale(1.1);}
+
+/* Hero */
+.hero{padding:180px 20px;text-align:center;position:relative;opacity:0;transform:translateY(50px);transition:1s;}
+.hero.show{opacity:1;transform:translateY(0);}
+.hero h2{font-size:3.6rem;color:#4af;text-shadow:0 0 15px #4af,0 0 25px #0ff;margin-bottom:20px;}
+.typewriter{display:inline-block;overflow:hidden;border-right:4px solid #0ff;white-space:nowrap;animation:blink 0.75s step-end infinite;}
+@keyframes blink{50%{border-color:transparent;}}
+
+/* Sections */
+section{padding:80px 20px;max-width:1200px;margin:auto;margin-bottom:60px;background:rgba(0,0,0,0.7);border-radius:25px;transform:translateY(50px);opacity:0;transition:1s;}
+section.show{transform:translateY(0);opacity:1;}
+h2{text-align:center;margin-bottom:50px;font-size:2.8rem;color:#0ff;text-shadow:0 0 15px #0ff;}
+
+/* Cards */
+.card{background:rgba(20,20,20,0.9);border-radius:20px;box-shadow:0 0 45px rgba(0,255,255,0.7);flex:1 1 300px;padding:30px;margin:20px;transition:0.8s;transform-style:preserve-3d;opacity:0;transform:translateY(50px);}
+.card.show{opacity:1;transform:translateY(0);}
+.card:hover{transform:rotateY(10deg) rotateX(5deg) translateY(-15px);box-shadow:0 0 70px #0ff;}
+.card h3{color:#4af;margin-bottom:15px;text-shadow:0 0 10px #0ff;}
+.card p{color:#ddd;line-height:1.5;}
+.btn{display:inline-block;padding:14px 28px;background:#0ff;color:#000;border-radius:12px;margin-top:15px;transition:0.3s;cursor:pointer;box-shadow:0 0 25px #0ff;font-weight:bold;}
+.btn:hover{background:#4af;transform:scale(1.15);box-shadow:0 0 60px #0ff;}
+
+/* Slider */
+.slider{position:relative;overflow:hidden;width:100%;max-width:1000px;margin:auto;}
+.slides{display:flex;transition:0.6s;perspective:1200px;}
+.slides .card{min-width:100%;margin:0;backface-visibility:hidden;}
+.slider-buttons{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);}
+.slider-buttons button{background:#0ff;border:none;color:#000;padding:16px;border-radius:50%;cursor:pointer;transition:0.3s;box-shadow:0 0 25px #0ff;}
+.slider-buttons button:hover{background:#4af;transform:scale(1.2);box-shadow:0 0 70px #0ff;}
+
+/* Contact Form */
+form input, form textarea{width:100%;padding:12px;margin-bottom:12px;border-radius:10px;border:none;outline:none;}
+form button{width:100%;}
+
+/* FAQ */
+.faq-item{background:rgba(20,20,20,0.9);margin-bottom:15px;border-radius:15px;padding:20px;cursor:pointer;transition:0.3s;}
+.faq-answer{max-height:0;overflow:hidden;transition:0.5s;}
+.faq-item.active .faq-answer{max-height:200px;margin-top:10px;}
+
+/* Footer */
+footer{background:#111;text-align:center;padding:50px 20px;}
+footer div{border:2px solid #0ff;display:inline-block;padding:18px 30px;border-radius:20px;background:white;color:#0ff;font-weight:bold;box-shadow:0 0 40px #0ff;transition:0.3s;}
+footer div:hover{background:#0ff;color:#000;box-shadow:0 0 80px #0ff;}
+
+/* Blog */
+.blog-link{color:#0ff;text-decoration:none;transition:0.3s;}
+.blog-link:hover{color:#4af;}
+.blog-card{cursor:pointer;}
+
+/* Responsive */
+@media(max-width:768px){
+    header{flex-direction:column;}
+    nav a{margin:10px;}
+    .hero h2{font-size:2.8rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="code-overlay"></div>
+
+<header>
+    <h1>CodeMaster Pro</h1>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="#blog" class="blog-link">Blog</a>
+    </nav>
+</header>
+
+<div class="hero" id="hero">
+    <h2><span class="typewriter" id="typewriter"></span></h2>
+</div>
+
+<section id="about">
+    <h2>About Me</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+        <div class="card"> 
+            <h3>Who I Am</h3>
+            <p>Professional web developer with skills in HTML, CSS, JS, React, Node.js, and UI/UX design.</p>
+        </div>
+        <div class="card"> 
+            <h3>My Mission</h3>
+            <p>Creating interactive websites with futuristic design and excellent UX/UI experience.</p>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+        <div class="card">HTML & CSS</div>
+        <div class="card">JavaScript & ES6+</div>
+        <div class="card">React / Vue</div>
+        <div class="card">Node.js / Express</div>
+        <div class="card">UI/UX Design</div>
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+    <div class="slider">
+        <div class="slides">
+            <div class="card">
+                <h3>Portfolio Website</h3>
+                <p>Interactive personal portfolio with animations.</p>
+                <div class="btn">Add Option</div>
+            </div>
+            <div class="card">
+                <h3>Task Manager App</h3>
+                <p>Productivity app with modern UI.</p>
+                <div class="btn">Add Option</div>
+            </div>
+        </div>
+        <div class="slider-buttons">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
+        </div>
+    </div>
+</section>
+
+<section id="services">
+    <h2>Services</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+        <div class="card">Web Development</div>
+        <div class="card">UI/UX Design</div>
+        <div class="card">Custom Web Apps</div>
+        <div class="card">Website Optimization</div>
+    </div>
+</section>
+
+<section id="faq">
+    <h2>FAQ</h2>
+    <div class="faq-item">What technologies do you use?
+        <div class="faq-answer">HTML, CSS, JavaScript, React, Node.js, Express, and UI/UX tools.</div>
+    </div>
+    <div class="faq-item">Do you provide web app development?
+        <div class="faq-answer">Yes, I create custom web applications tailored to your needs.</div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <div class="card" style="max-width:500px;margin:auto;">
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send</button>
+        </form>
+        <p id="formMessage" style="margin-top:10px;color:#0f0;display:none;">Message sent successfully!</p>
+    </div>
+</section>
+
+<section id="blog">
+    <h2>Blog</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;">
+        <div class="card blog-card" data-title="Introduction to Modern Web Development" data-content="Welcome to my first blog post! In this blog, I will share tips and insights about modern web development, animations, and futuristic UI/UX design. Stay tuned for more content!">
+            <h3>Introduction to Modern Web Development</h3>
+            <p>Click to read more...</p>
+        </div>
+        <div class="card blog-card" data-title="JavaScript Animations Tips" data-content="In this post, we explore how to use JavaScript animations effectively to enhance UX and engage users. Animations should be smooth and meaningful.">
+            <h3>JavaScript Animations Tips</h3>
+            <p>Click to read more...</p>
+        </div>
+        <div class="card blog-card" data-title="Futuristic Web Design" data-content="Designing futuristic websites involves a combination of neon colors, 3D effects, and smooth transitions. Learn how to implement these designs.">
+            <h3>Futuristic Web Design</h3>
+            <p>Click to read more...</p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="blogModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;justify-content:center;align-items:center;z-index:200;overflow:auto;">
+        <div style="background:#111;padding:40px;border-radius:25px;max-width:800px;color:#fff;position:relative;">
+            <span id="closeModal" style="position:absolute;top:20px;right:30px;font-size:30px;cursor:pointer;color:#0ff;">&times;</span>
+            <h3 id="modalTitle" style="color:#0ff;margin-bottom:20px;"></h3>
+            <p id="modalContent" style="line-height:1.8;"></p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div>Made by Hamid Reza</div>
+</footer>
+
+<script>
+// Typewriter
+const typewriterText = "Hi, I'm Hamid Reza, a Futuristic Web Developer.";
+let i=0;
+function typeWriter(){
+    const el=document.getElementById("typewriter");
+    if(i<typewriterText.length){
+        el.textContent+=typewriterText[i];
+        i++;
+        setTimeout(typeWriter,70);
+    }
+}
+typeWriter();
+
+// Scroll animation
+const sections = document.querySelectorAll('section');
+const cards = document.querySelectorAll('.card');
+window.addEventListener('scroll', () => {
+    sections.forEach(section=>{
+        const rect=section.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+            section.classList.add('show');
+        }
+    });
+    cards.forEach(card=>{
+        const rect = card.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+            card.classList.add('show');
+        }
+    });
+    const hero = document.getElementById('hero');
+    hero.classList.add('show');
+});
+
+// Slider
+const slides=document.querySelector('.slides');
+const slideCards=document.querySelectorAll('.slides .card');
+let currentIndex=0;
+document.getElementById('next').addEventListener('click',()=>{
+    currentIndex=(currentIndex+1)%slideCards.length;
+    slides.style.transform=`translateX(-${currentIndex*100}%)`;
+});
+document.getElementById('prev').addEventListener('click',()=>{
+    currentIndex=(currentIndex-1+slideCards.length)%slideCards.length;
+    slides.style.transform=`translateX(-${currentIndex*100}%)`;
+});
+
+// Contact form
+const form=document.getElementById('contactForm');
+const message=document.getElementById('formMessage');
+form.addEventListener('submit',e=>{
+    e.preventDefault();
+    message.style.display='block';
+    form.reset();
+    setTimeout(()=>{message.style.display='none'},3000);
+});
+
+// FAQ toggle
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item=>{
+    item.addEventListener('click', ()=>{
+        item.classList.toggle('active');
+    });
+});
+
+// Blog modal
+const blogCards = document.querySelectorAll('.blog-card');
+const modal = document.getElementById('blogModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalContent = document.getElementById('modalContent');
+const closeModal = document.getElementById('closeModal');
+
+blogCards.forEach(card=>{
+    card.addEventListener('click', ()=>{
+        modal.style.display = 'flex';
+        modalTitle.textContent = card.dataset.title;
+        modalContent.textContent = card.dataset.content;
+    });
+});
+
+closeModal.addEventListener('click', ()=>{
+    modal.style.display = 'none';
+});
+modal.addEventListener('click', (e)=>{
+    if(e.target === modal) modal.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
